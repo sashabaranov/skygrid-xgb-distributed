@@ -4,14 +4,11 @@ echo $host
 echo "addr = \"${host}:4001\"" >> /etc/etcd/etcd.conf
 echo "bind_addr = \"${host}:4001\"" >> /etc/etcd/etcd.conf
 etcd &
-addr=$(etcdctl get /addr | grep -x  [0-9]*.[0-9]*.[0-9]*.[0-9]*)
-while [ "${addr}" = "" ]
+http://$host:4001/v2/keys/hello -XPUT -d value=hello
+curl -L http://$host:4001/v2/keys/addr$clientsNumber?wait=true
+curl -L http://$host:4001/v2/keys/clientsNumber -XPUT -d value=$clientsNumber
+for ((i=1; i<=$clientsNumber; i++))
 do
-sleep 1s
-addr=$(etcdctl get /addr | grep -x  [0-9]*.[0-9]*.[0-9]*.[0-9]*)
-echo $addr
+  curl -L http://$host:4001/v2/keys/finished$i?wait=true
 done
-echo client addr $addr
-echo hello | nc $addr 1027
-echo sent hello
-
+echo all finished
