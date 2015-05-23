@@ -30,7 +30,7 @@ XGBoost для обучающей выборки использует данны
 * Создать пустую директорию, которая будет в последствии монтироваться в контейнер
 * Положить части обучающей выборки и тестовых данных в директорию в соответствующем формате.
 * Создать в директории конфирурационный файл для XGBoost с необходимыми параметрами
-[пример](https://github.com/dmlc/xgboost/blob/master/multi-node/col-split/mushroom-col.conf)
+([пример](https://github.com/dmlc/xgboost/blob/master/multi-node/col-split/mushroom-col.conf))
 
 #### Формат конфигурационного файла XGBoost
 
