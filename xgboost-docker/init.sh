@@ -44,6 +44,8 @@ chown mpiu /mirror
 chown mpiu /data
 mount -t nfs -o proto=tcp,port=$nfs_port $nfs_ip:/mirror /mirror
 
+./wait_etcd_barrier.sh $task $etcd_ip $etcd_port ssh $clients_number
+
 if (($order_number == 0))
 then
   su mpiu -c "mpicc ~/mpi_hello.c -o ~/mpi_hello"
