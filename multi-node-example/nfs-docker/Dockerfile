@@ -35,4 +35,8 @@ RUN su mpiu -c " \
 
 COPY init.sh /
 RUN chmod +x /init.sh
+RUN rm /mirror/xgboost/subtree/rabit/tracker/rabit_mpi.py
+ADD rabit_mpi.py /mirror/xgboost/subtree/rabit/tracker/
+RUN chmod +x /mirror/xgboost/subtree/rabit/tracker/rabit_mpi.py \
+  && chown mpiu /mirror/xgboost/subtree/rabit/tracker/rabit_mpi.py
 CMD /init.sh
